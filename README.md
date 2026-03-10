@@ -46,7 +46,7 @@ and both images would use it, making a second Dockerfile pointless.
 
 | Image | Ubuntu VM (amd64) | macOS Intel (amd64) | MacBook Pro (arm64) |
 |-------|:---:|:---:|:---:|
-| `dev-container-rust` | Passed | Pending | Pending |
+| `dev-container-rust` | Passed | Passed | Passed |
 
 ## Image Name
 

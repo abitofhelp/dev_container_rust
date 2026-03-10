@@ -207,7 +207,7 @@ The Rust toolchain is installed via rustup, the official Rust installer:
    all users via `chmod -R a+rX`.
 
 2. **Stable channel** with additional components: `rust-analyzer`,
-   `llvm-tools` (for embedded `objcopy`, `size`, etc.).
+   `llvm-tools-preview` (for embedded `objcopy`, `size`, etc.).
 
 3. **Embedded targets** are added via `rustup target add` — Rust uses the
    same compiler for desktop and embedded, unlike C/C++ which requires
@@ -497,9 +497,9 @@ release. Remove or update entries as they are verified.
 | Area                              | Status       | Notes                                                        |
 |-----------------------------------|--------------|--------------------------------------------------------------|
 | Rootless nerdctl (local)          | Verified     | Ubuntu 24.04 base, nerdctl. Build + smoke test passed.      |
-| Docker rootful (macOS)            | Pending      | macOS Intel host, Docker.                                    |
-| GitHub Actions build workflow     | Pending      | Multi-arch build + smoke test.                               |
-| GitHub Actions publish workflow   | Pending      | GHCR push.                                                   |
+| Docker rootful (macOS)            | Verified     | macOS Intel host, Docker. Build + smoke test passed.        |
+| GitHub Actions build workflow     | Verified     | Multi-arch build + smoke test passed.                        |
+| GitHub Actions publish workflow   | Verified     | GHCR push passed.                                            |
 | Podman rootless (local)           | Blocked      | `--userns=keep-id` fails in Parallels VM (kernel restriction). |
 | Kubernetes deployment             | Not tested   | Image is designed to be compatible; no cluster available.    |
 
