@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-03-09
+
+### Added
+
+- "Embedded Toolchain Readiness" table in README confirming all three targets
+  (desktop, Cortex-M7 bare-metal, Cortex-A7 Linux) are pre-installed.
+- `.cargo/config.toml` examples in USER_GUIDE §0.3 for desktop, bare-metal,
+  and Linux cross-compilation targets.
+
+### Fixed
+
+- README badges placed on a single line for correct inline rendering.
+
 ## [1.0.0] - 2026-03-10
 
 ### Added
