@@ -137,6 +137,17 @@ cross-compiler (like `arm-none-eabi-gcc`) is needed for bare-metal targets.
 The Linux cross-compilation target requires `arm-linux-gnueabihf-gcc` for
 linking C dependencies and the sysroot (`libc6-dev-armhf-cross`).
 
+### Embedded Toolchain Readiness
+
+This image is fully self-contained for all three targets. No additional
+downloads or toolchain installation is required.
+
+| Target | Rust Target / Linker | Status |
+|--------|----------------------|--------|
+| Desktop (native) | default host target | Pre-installed |
+| STM32F769I — Cortex-M7 bare-metal | `thumbv7em-none-eabihf` | Pre-installed |
+| STM32MP135F — Cortex-A7 Linux | `armv7-unknown-linux-gnueabihf` + `arm-linux-gnueabihf-gcc` | Pre-installed |
+
 ### Embedded Targets (installed via rustup)
 
 | Target | Board | Core | Runtime |

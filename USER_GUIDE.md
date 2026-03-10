@@ -61,6 +61,52 @@ linking C dependencies and the sysroot (`libc6-dev-armhf-cross`).
 For ST's proprietary tools (STM32CubeCLT, STM32CubeMX), see the "STM32 Custom
 Image" section in [README.md](README.md#stm32-custom-image).
 
+#### Configuring your project for each target
+
+**Desktop (native)**
+
+No extra configuration is needed. Build with Cargo directly:
+
+```bash
+cargo build
+```
+
+**STM32F769I — Cortex-M7 bare-metal**
+
+Create a `.cargo/config.toml` in your project root:
+
+```toml
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+]
+```
+
+The `link.x` linker script is typically provided by your board support crate
+(e.g., `cortex-m-rt`). Then build as usual:
+
+```bash
+cargo build
+```
+
+**STM32MP135F — Cortex-A7 Linux**
+
+Create a `.cargo/config.toml` in your project root:
+
+```toml
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+```
+
+Then build with the cross-compilation target:
+
+```bash
+cargo build --target armv7-unknown-linux-gnueabihf
+```
+
 ---
 
 ## 1. Prerequisites
