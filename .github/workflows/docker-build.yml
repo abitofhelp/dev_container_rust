@@ -1,0 +1,76 @@
+# ============================================================================
+# docker-build.yml
+# ============================================================================
+# Copyright (c) 2025 Michael Gardner, A Bit of Help, Inc.
+# SPDX-License-Identifier: BSD-3-Clause
+# See LICENSE file in the project root.
+# ============================================================================
+
+name: Docker Build
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@49b3bc8e6bdd4a60e6116a5414239cba5943d3cf # v3.2.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+
+      - name: Build image (amd64 + arm64)
+        run: |
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            -f Dockerfile \
+            -t dev-container-rust:ci .
+
+      - name: Load amd64 image for smoke test
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            --load \
+            -f Dockerfile \
+            -t dev-container-rust:ci .
+
+      - name: Smoke test
+        run: |
+          docker run --rm \
+            -e HOST_UID=$(id -u) \
+            -e HOST_GID=$(id -g) \
+            -e HOST_USER=$(whoami) \
+            -v "${{ github.workspace }}":/workspace \
+            -w /workspace/examples/hello_rust \
+            dev-container-rust:ci \
+            bash -c '
+              set -e
+              echo "=== Environment ==="
+              echo "USER=$(whoami) UID=$(id -u) GID=$(id -g) HOME=$HOME"
+              echo "DISPLAY_USER=$DISPLAY_USER"
+              echo "CONTAINER_RUNTIME=$CONTAINER_RUNTIME"
+              echo ""
+              echo "=== Compile test (cargo build) ==="
+              cargo build 2>&1
+              echo ""
+              echo "=== Run test ==="
+              cargo run 2>&1
+              echo ""
+              echo "=== Toolchain versions ==="
+              rustc --version
+              cargo --version
+              rustup target list --installed | head -6
+              probe-rs --version
+              mold --version
+              arm-linux-gnueabihf-gcc --version | head -1
+              echo "=== Smoke test passed ==="
+            '

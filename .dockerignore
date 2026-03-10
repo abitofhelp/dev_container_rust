@@ -1,0 +1,30 @@
+# ============================================================================
+# .dockerignore
+# ============================================================================
+# Copyright (c) 2025 Michael Gardner, A Bit of Help, Inc.
+# SPDX-License-Identifier: BSD-3-Clause
+# See LICENSE file in the project root.
+# ============================================================================
+
+*.pyc
+*.tar
+*.tar.gz
+*.tar.xz
+*.tgz
+CHANGELOG.md
+.claude
+.DS_Store
+.git
+.github
+.gitignore
+.pytest_cache
+.venv
+.vscode
+__pycache__
+coverage
+dist
+examples
+exports
+Makefile
+target
+tmp
