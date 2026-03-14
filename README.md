@@ -110,7 +110,7 @@ parallels@container /workspace (main) [ctr:rootless]
 | **Text processing** | awk, sed, grep, diff, find, xargs, sort, uniq, wc, head, tail, tr, cut, tee |
 | **Network** | curl, wget, rsync |
 | **Archives** | tar, zip, unzip, xz, gzip, bzip2 |
-| **Editors** | vim, nano |
+| **Editors** | vim, neovim, nano |
 | **Pagers / utilities** | less, more, file, which, lsof, ps, jq |
 | **Search** | ripgrep (rg), fd-find (fdfind), fzf |
 | **Python** | python3, pip3, python3-venv |
